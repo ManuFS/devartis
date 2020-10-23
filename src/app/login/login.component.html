@@ -1,1 +1,25 @@
-<p>login works!</p>
+<div class="overlay">
+    <div class="login" [formGroup]="loginForm">
+
+        <h6 *ngIf="!registration">LOGIN</h6>
+        <h6 *ngIf="registration">REGISTER</h6>
+
+        <label for="name">Name</label>
+        <input formControlName="name">
+        <label for="password">Password</label>
+        <input formControlName="password">
+
+        <p class="warning">
+            <span *ngIf="warning">All fields are required</span>
+            <span *ngIf="failedLogin">Incorrect name/password</span>
+        </p>
+
+        <button *ngIf="!registration" (click)="action('login')" type="button" class="btn hover">LOGIN</button>
+        <button *ngIf="registration" (click)="action('register')" type="button" class="btn hover">REGISTER</button> 
+        <!-- Could also be disabled until loginForm.valid -->
+
+        <a *ngIf="!registration" (click)="changeAction()" class="changeAction hover">Register instead</a>
+        <a *ngIf="registration" (click)="changeAction()" class="changeAction hover">Login instead</a>
+
+    </div>
+</div>

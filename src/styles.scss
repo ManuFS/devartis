@@ -1,1 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
+$lightblue: #3eb0c7;
+
+.btn {
+    background-color: $lightblue;
+    color: #FFF;
+    padding: 8px 12px;
+    border-radius: 6px;
+    outline: none;
+    border: none;
+    &:hover {
+        cursor: pointer;
+    }
+    &:disabled {
+        background-color: gray;
+        opacity: 1;
+    }
+}
+
+.hover {
+    transition: 0.15s ease-in-out;
+    &:hover {
+        opacity: 0.75;
+        cursor: pointer;
+    }
+}
