@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HomeService } from '../home.service';
 
 @Component({
   selector: 'app-home',
@@ -9,14 +10,25 @@ export class HomeComponent implements OnInit {
 
   public isLogged: boolean = false;
 
-  constructor() { }
+  constructor(
+    private homeService: HomeService
+  ) { }
 
   ngOnInit(): void {
     
   }
 
   public logged() {
-    console.log('asd')
     this.isLogged = true;
+    this.feedSuscribe();
+  }
+
+  public feedSuscribe() {
+    const token = sessionStorage.getItem('auth_token');
+    this.homeService.feed(token).subscribe(res => {
+      console.log(res);
+    }, err => {
+      console.log(err);
+    })
   }
 }

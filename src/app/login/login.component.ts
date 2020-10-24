@@ -27,6 +27,11 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.setUpForm();
+
+    // if (this.loginService.getUser() && this.loginService.getToken()) {
+    //   this.logIn.emit('')
+    // }
+    // I think this is preferably done with a Guard, but i couldn't get this to work neither.
   }
 
   private setUpForm() {
