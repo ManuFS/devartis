@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,10 @@ export class LoginComponent implements OnInit {
   public warning: boolean = false;
   public failedLogin: boolean = false;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private loginService: LoginService
+    ) { }
 
   ngOnInit(): void {
     this.setUpForm();
@@ -41,15 +45,30 @@ export class LoginComponent implements OnInit {
       this.warning = false;
     }
 
-    this.registration ? this.register : this.login();
+    const user = this.loginForm.value.name;
+    const pass = this.loginForm.value.password;
+
+    this.registration ? this.register(user, pass) : this.login(user, pass);
   }
 
-  private login() {
+  private login(user, pass) {
+
+    this.loginService.login(user, pass).subscribe(res => {
+      console.log(res);
+    }), err => {
+      console.log(err);
+    }
 
   }
 
-  private register() {
-    
+  private register(user, pass) {
+
+    this.loginService.register(user, pass).subscribe(res => {
+      console.log(res);
+    }), err => {
+      console.log(err);
+    }
+
   }
 
   public changeAction() {
