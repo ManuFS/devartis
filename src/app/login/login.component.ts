@@ -53,8 +53,9 @@ export class LoginComponent implements OnInit {
 
   private login(user, pass) {
 
-    this.loginService.login(user, pass).subscribe(res => {
-      console.log(res);
+    this.loginService.login(user, pass).subscribe((res:any) => {
+      sessionStorage.setItem('auth_token', res.access_token);
+      sessionStorage.setItem('user_id', res.user_id);
     }), err => {
       console.log(err);
     }
