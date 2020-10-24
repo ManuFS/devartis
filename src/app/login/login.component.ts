@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { LoginService } from '../login.service';
 
@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   )
   public warning: boolean = false;
   public failedLogin: boolean = false;
+  @Output() logIn = new EventEmitter();
 
   constructor(
     private fb: FormBuilder,
@@ -56,8 +57,9 @@ export class LoginComponent implements OnInit {
     this.loginService.login(user, pass).subscribe((res:any) => {
       sessionStorage.setItem('auth_token', res.access_token);
       sessionStorage.setItem('user_id', res.user_id);
+      this.logIn.emit('');
     }), err => {
-      console.log(err);
+      this.failedLogin = true;
     }
 
   }

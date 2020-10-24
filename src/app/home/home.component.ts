@@ -15,4 +15,8 @@ export class HomeComponent implements OnInit {
     
   }
 
+  public logged() {
+    console.log('asd')
+    this.isLogged = true;
+  }
 }
